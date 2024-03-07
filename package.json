@@ -35,6 +35,6 @@
   "module": "index.ts",
   "include": [
     "src/**/*",
-    "next.config.mjs"
+    "next.config.js"
   ]
 }
