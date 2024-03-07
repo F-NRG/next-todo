@@ -32,7 +32,6 @@
     "prettier": "^3.2.5",
     "typescript": "^5"
   },
-  "module": "index.ts",
   "include": [
     "src/**/*",
     "next.config.js"
