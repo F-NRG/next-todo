@@ -14,7 +14,7 @@ const styles = stylex.create({
 export default function Home() {
   return (
     <main {...stylex.props(styles.center)}>
-      <h1>Welkom bij deze basic todo app!</h1>
+      <h1>Welkom bij deze basic to-do app!</h1>
       <Client />
     </main>
   );

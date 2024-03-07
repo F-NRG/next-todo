@@ -22,10 +22,12 @@ const styles = stylex.create({
 const ClientPage = () => {
   const [items, setItems] = useState<Array<string>>([]);
 
-  const handleSubmit = (e: FormEvent<Element>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log('EVENT on submit ', e.target);
-    setItems([...items, e.target.todo.value]);
+    const input = e.target as HTMLFormElement;
+
+    setItems([...items, input.todo.value]);
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
