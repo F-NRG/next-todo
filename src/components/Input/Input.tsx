@@ -5,10 +5,9 @@ import type { FC } from 'react';
 const styles = stylex.create({
   input: {
     backgroundColor: 'white',
-    borderTop: '1px solid #efa7a7ff',
-    borderBottom: '1px solid #efa7a7ff',
-    borderLeft: '1px solid #efa7a7ff',
-    borderRight: '1px solid #efa7a7ff',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: '#efa7a7ff',
     padding: '.5rem 1rem',
     borderRadius: '.2rem',
     flexGrow: 1,

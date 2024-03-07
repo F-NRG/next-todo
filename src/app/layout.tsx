@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 const styles = stylex.create({
   text: {
     fontFamily: 'Roboto, sans-serif',
-    fontWeight: '400',
+    fontWeight: 400,
     fontStyle: 'normal',
   },
 });

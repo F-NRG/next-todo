@@ -9,7 +9,7 @@ import List from '@/components/List/List';
 const styles = stylex.create({
   form: {
     backgroundColor: '#a7e8bd',
-    border: 'none',
+    borderStyle: 'none',
     borderRadius: '.5rem',
     color: 'white',
     display: 'flex',

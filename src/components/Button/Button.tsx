@@ -6,7 +6,9 @@ import type { FC } from 'react';
 const styles = stylex.create({
   button: {
     backgroundColor: { 'default': '#efa7a7ff', ':hover': '#fcbcb8ff' },
-    border: '1px solid #efa7a7ff',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: '#efa7a7ff',
     padding: '.5rem 1rem',
     borderRadius: '.2rem',
     color: 'white',
