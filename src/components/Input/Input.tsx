@@ -12,10 +12,8 @@ const styles = stylex.create({
     padding: '.5rem 1rem',
     borderRadius: '.2rem',
     flexGrow: 1,
-    // ':focus-visible': {
-    //   outline: 'none',
-    //   boxShadow: '0 0 0 3px #efa7a7ff',
-    // },
+    outline: { 'default': null, ':focus-visible': 'none' },
+    boxShadow: { 'default': null, ':focus-visible': '0 0 0 2px #efa7a7ff' },
   },
 });
 

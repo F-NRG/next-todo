@@ -8,7 +8,7 @@ import List from '@/components/List/List';
 
 const styles = stylex.create({
   form: {
-    backgroundColor: '#A7E8BD',
+    backgroundColor: '#a7e8bd',
     border: 'none',
     borderRadius: '.5rem',
     color: 'white',
