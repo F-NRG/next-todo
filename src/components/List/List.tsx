@@ -8,33 +8,43 @@ const styles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     alignContent: 'center',
-    width: '100%',
     padding: '.5rem',
     borderRadius: '.2rem',
     flexGrow: 1,
     listStyle: 'none',
+    width: '100%',
+    gap: '.2rem',
+  },
+  wrapper: {
+    display: 'flex',
+    width: '100%',
   },
 });
 
 type Props = {
   items: Array<string>;
+  title: string;
+  onDelete: (i: number) => void;
 };
 
-const List: FC<Props> = ({ items }) => {
+const List: FC<Props> = ({ items, title, onDelete }) => {
   console.log('items ', items);
   return (
-    <>
+    <section>
+      <h2>{title}</h2>
       {items.length > 0 && (
         <ul {...stylex.props(styles.list)}>
           {items.map((item, index) => (
             <Todo
               key={index}
               item={item}
+              index={index}
+              onDelete={onDelete}
             />
           ))}
         </ul>
       )}
-    </>
+    </section>
   );
 };
 

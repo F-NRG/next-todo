@@ -24,9 +24,7 @@ const ClientPage = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('EVENT on submit ', e.target);
     const input = e.target as HTMLFormElement;
-
     setItems([...items, input.todo.value]);
   };
 
@@ -34,7 +32,10 @@ const ClientPage = () => {
     console.log('EVENT on  change ', e.target.value);
   };
 
-  // const handleDelete = (e: SyntheticEvent<Element>) => {};
+  const handleDelete = (index: number) => {
+    const newItems = items.filter((_, i) => i !== index);
+    setItems([...newItems]);
+  };
 
   return (
     <>
@@ -50,10 +51,14 @@ const ClientPage = () => {
         <Button
           text="Add todo"
           type="submit"
+          name="add-todo"
         />
       </form>
-      <h2>Start doing:</h2>
-      <List items={items} />
+      <List
+        title="Start doing:"
+        items={items}
+        onDelete={handleDelete}
+      />
     </>
   );
 };

@@ -13,6 +13,14 @@ const styles = stylex.create({
     fontWeight: 400,
     fontStyle: 'normal',
   },
+  layout: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: '100%',
+  },
 });
 
 export default function RootLayout({
@@ -22,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body {...stylex.props(styles.text)}>{children}</body>
+      <body {...stylex.props(styles.text, styles.layout)}>{children}</body>
     </html>
   );
 }

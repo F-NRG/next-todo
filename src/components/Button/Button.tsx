@@ -19,16 +19,18 @@ const styles = stylex.create({
 type Props = {
   value?: string;
   text?: string;
+  name?: string;
   type?: 'button' | 'submit' | 'reset';
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const Button: FC<Props> = ({ value = '', text = 'button', type = 'button', onClick }) => {
+const Button: FC<Props> = ({ name = 'button-el', value = '', text = 'button', type = 'button', onClick }) => {
   return (
     <button
       {...stylex.props(styles.button)}
       value={value}
       type={type}
+      name={name}
       onClick={onClick}
     >
       {text.toUpperCase()}
