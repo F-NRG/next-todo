@@ -1,6 +1,6 @@
 'use client';
 import * as stylex from '@stylexjs/stylex';
-import type { FC } from 'react';
+import type { ChangeEvent, FC } from 'react';
 import Todo from '../Todo/Todo';
 
 const styles = stylex.create({
@@ -25,9 +25,10 @@ type Props = {
   items: Array<string>;
   title: string;
   onDelete: (i: number) => void;
+  onUpdateItem: (value: string, index: number) => void;
 };
 
-const List: FC<Props> = ({ items, title, onDelete }) => {
+const List: FC<Props> = ({ items, title, onDelete, onUpdateItem }) => {
   console.log('items ', items);
   return (
     <section>
@@ -40,6 +41,7 @@ const List: FC<Props> = ({ items, title, onDelete }) => {
               item={item}
               index={index}
               onDelete={onDelete}
+              onUpdateItem={onUpdateItem}
             />
           ))}
         </ul>

@@ -28,8 +28,9 @@ const ClientPage = () => {
     setItems([...items, input.todo.value]);
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log('EVENT on  change ', e.target.value);
+  const handleUpdateItem = (value: string, index: number) => {
+    const updatedItems = items.map((item, i) => (i === index ? value : item));
+    setItems(updatedItems);
   };
 
   const handleDelete = (index: number) => {
@@ -44,7 +45,6 @@ const ClientPage = () => {
         onSubmit={handleSubmit}
       >
         <Input
-          onChange={handleChange}
           placeholder="Start typing..."
           name="todo"
         />
@@ -58,6 +58,7 @@ const ClientPage = () => {
         title="Start doing:"
         items={items}
         onDelete={handleDelete}
+        onUpdateItem={handleUpdateItem}
       />
     </>
   );

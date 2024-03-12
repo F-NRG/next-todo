@@ -24,13 +24,14 @@ type Props = {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const Input: FC<Props> = ({ name = 'input-field', placeholder = 'placeholder', onChange }) => {
+const Input: FC<Props> = ({ name = 'input-field', placeholder = 'placeholder', onChange, value }) => {
   return (
     <input
       {...stylex.props(styles.input)}
       name={name}
       placeholder={placeholder}
       onChange={onChange}
+      value={value}
     />
   );
 };
