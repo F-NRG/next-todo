@@ -15,10 +15,10 @@ const styles = stylex.create({
     width: '500px',
     gap: '.5rem',
   },
-  index: {
-    fontFamily: 'Roboto, sans-serif',
-    fontWeight: 700,
-    fontStyle: 'normal',
+  span: {
+    fontFamily: 'Roboto',
+    fontWeight: 400,
+    textDecoration: 'line-through',
   },
   buttonGroup: {
     display: 'flex',
@@ -33,9 +33,9 @@ type Props = {
 export const Completed: FC<Props> = ({ item }) => {
   return (
     <li {...stylex.props(styles.todo)}>
-      <span {...stylex.props(styles.index)}>#&nbsp;{1}</span>
-      <span {...stylex.props(styles.index)}>DONE</span>
-      <span>{item.value}</span>
+      <span>V</span>
+      <span {...stylex.props(styles.span)}>{item.value}</span>
+      <span>DONE!</span>
     </li>
   );
 };

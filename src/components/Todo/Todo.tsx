@@ -4,7 +4,7 @@ import { ChangeEvent, useEffect, useState, type FC } from 'react';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
 import type { Todo } from '@/types/Todo';
-
+import { Completed } from './Completed';
 const styles = stylex.create({
   todo: {
     display: 'flex',
@@ -12,7 +12,7 @@ const styles = stylex.create({
     alignItems: 'center',
     padding: '.5rem',
     borderRadius: '.2rem',
-    borderColor: '#a7e8bd',
+    borderColor: '#efa7a7ff',
     borderWidth: '5px',
     borderStyle: 'solid',
     width: '500px',
@@ -61,7 +61,9 @@ const TodoItem: FC<Props> = ({ index, item, onDelete, onUpdateTodo }) => {
 
   return (
     <>
-      {todo.completed ? null : (
+      {todo.completed ? (
+        <Completed item={todo} />
+      ) : (
         <li {...stylex.props(styles.todo)}>
           {isEditing ? (
             <Input
