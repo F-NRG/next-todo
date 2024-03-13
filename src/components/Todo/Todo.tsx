@@ -1,8 +1,10 @@
 'use client';
 import * as stylex from '@stylexjs/stylex';
-import { ChangeEvent, useState, type FC } from 'react';
+import { ChangeEvent, useEffect, useState, type FC } from 'react';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
+import type { Todo } from '@/types/Todo';
+
 const styles = stylex.create({
   todo: {
     display: 'flex',
@@ -26,54 +28,71 @@ const styles = stylex.create({
     gap: '.5rem',
   },
 });
-//   box-shadow: inset 0px 0px 0px 10px red;
+
 type Props = {
-  item: string;
+  item: Todo;
   index: number;
-  onUpdateItem: (value: string, index: number) => void;
+  onUpdateTodo: (todo: Todo, index: number) => void;
   onDelete: (i: number) => void;
 };
 
-const Todo: FC<Props> = ({ index, item, onDelete, onUpdateItem }) => {
+const TodoItem: FC<Props> = ({ index, item, onDelete, onUpdateTodo }) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [itemValue, setSetItemValue] = useState<string>(item);
+  const [todo, setTodo] = useState<Todo>(item);
+
+  useEffect(() => {
+    setTodo(item);
+  }, [item]);
 
   const handleItemValue = (e: ChangeEvent<HTMLInputElement>) => {
-    setSetItemValue(e.target.value);
+    setTodo({ ...todo, value: e.target.value });
   };
+
+  const handleCompleted = (i: number) => {
+    onUpdateTodo({ ...todo, completed: true }, i);
+  };
+
   const toggleSaveEdit = () => {
-    if (itemValue !== item && isEditing) {
-      onUpdateItem(itemValue, index);
+    if (todo.value !== item.value && isEditing) {
+      onUpdateTodo(todo, index);
     }
     setIsEditing(!isEditing);
   };
 
   return (
-    <li {...stylex.props(styles.todo)}>
-      {isEditing ? (
-        <Input
-          name="edit-todo"
-          onChange={handleItemValue}
-          value={itemValue}
-        />
-      ) : (
-        <>
-          <span {...stylex.props(styles.index)}>#&nbsp;{index + 1}</span>
-          <span>{item}</span>
-        </>
+    <>
+      {todo.completed ? null : (
+        <li {...stylex.props(styles.todo)}>
+          {isEditing ? (
+            <Input
+              name="edit-todo"
+              onChange={handleItemValue}
+              value={todo.value}
+            />
+          ) : (
+            <>
+              <span {...stylex.props(styles.index)}>#&nbsp;{index + 1}</span>
+              <span>{todo.value}</span>
+            </>
+          )}
+          <div {...stylex.props(styles.buttonGroup)}>
+            <Button
+              onClick={toggleSaveEdit}
+              text={isEditing ? 'Save' : 'Edit'}
+            />
+            <Button
+              onClick={() => onDelete(index)}
+              text="X"
+            />
+            <Button
+              onClick={() => handleCompleted(index)}
+              text="V"
+            />
+          </div>
+        </li>
       )}
-      <div {...stylex.props(styles.buttonGroup)}>
-        <Button
-          onClick={toggleSaveEdit}
-          text={isEditing ? 'Save' : 'Edit'}
-        />
-        <Button
-          onClick={() => onDelete(index)}
-          text="X"
-        />
-      </div>
-    </li>
+    </>
   );
 };
 
-export default Todo;
+export default TodoItem;

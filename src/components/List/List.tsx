@@ -1,7 +1,8 @@
 'use client';
 import * as stylex from '@stylexjs/stylex';
 import type { ChangeEvent, FC } from 'react';
-import Todo from '../Todo/Todo';
+import type { Todo } from '@/types/Todo';
+import TodoItem from '../Todo/Todo';
 
 const styles = stylex.create({
   list: {
@@ -22,26 +23,26 @@ const styles = stylex.create({
 });
 
 type Props = {
-  items: Array<string>;
+  todos: Array<Todo>;
   title: string;
   onDelete: (i: number) => void;
-  onUpdateItem: (value: string, index: number) => void;
+  onUpdateTodo: (todo: Todo, index: number) => void;
 };
 
-const List: FC<Props> = ({ items, title, onDelete, onUpdateItem }) => {
-  console.log('items ', items);
+const List: FC<Props> = ({ todos, title, onDelete, onUpdateTodo }) => {
+  console.log('todos in list: ', todos[0]);
   return (
     <section>
       <h2>{title}</h2>
-      {items.length > 0 && (
+      {todos.length > 0 && (
         <ul {...stylex.props(styles.list)}>
-          {items.map((item, index) => (
-            <Todo
+          {todos.map((item, index) => (
+            <TodoItem
               key={index}
               item={item}
               index={index}
               onDelete={onDelete}
-              onUpdateItem={onUpdateItem}
+              onUpdateTodo={onUpdateTodo}
             />
           ))}
         </ul>

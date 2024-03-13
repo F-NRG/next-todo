@@ -14,6 +14,9 @@ dependencies:
   '@stylexjs/nextjs-plugin':
     specifier: ^0.5.1
     version: 0.5.1(next@14.1.2)
+  '@stylexjs/open-props':
+    specifier: ^0.5.1
+    version: 0.5.1
   '@stylexjs/stylex':
     specifier: ^0.5.1
     version: 0.5.1
@@ -568,6 +571,15 @@ packages:
       next: 14.1.2(@babel/core@7.24.0)(react-dom@18.0.0)(react@18.0.0)
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /@stylexjs/open-props@0.5.1:
+    resolution: {integrity: sha512-eLDsfL5xCdtQNfYbGMXnztAO0+q5h0v0JcW0LwL5d9lyub03jH2nbwqk2ThT1mPKWR/5JWMSNg9thHDpvqtRQg==}
+    dependencies:
+      css-mediaquery: 0.1.2
+      invariant: 2.2.4
+      styleq: 0.1.3
+      utility-types: 3.11.0
     dev: false
 
   /@stylexjs/shared@0.5.1:
