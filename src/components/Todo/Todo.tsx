@@ -1,10 +1,13 @@
 'use client';
 import * as stylex from '@stylexjs/stylex';
-import { ChangeEvent, useEffect, useState, type FC } from 'react';
+import type { ChangeEvent } from 'react';
+import { useEffect, useState, type FC } from 'react';
+// import { useDraggable } from '@dnd-kit/core';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
-import type { Todo } from '@/types/Todo';
 import { Completed } from './Completed';
+import type { Todo } from '@/types/Todo';
+
 const styles = stylex.create({
   todo: {
     display: 'flex',
@@ -15,7 +18,7 @@ const styles = stylex.create({
     borderColor: '#efa7a7ff',
     borderWidth: '5px',
     borderStyle: 'solid',
-    width: '500px',
+    width: { 'default': '90%', '@media (min-width: 600px)': '500px' },
     gap: '.5rem',
   },
   index: {
@@ -26,6 +29,10 @@ const styles = stylex.create({
   buttonGroup: {
     display: 'flex',
     gap: '.5rem',
+  },
+  done: {
+    backgroundColor: { 'default': '#a7e8bd', ':hover': '#fcbcb8ff' },
+    borderColor: { 'default': '#a7e8bd', ':hover': '#fcbcb8ff' },
   },
 });
 
@@ -39,6 +46,15 @@ type Props = {
 const TodoItem: FC<Props> = ({ index, item, onDelete, onUpdateTodo }) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [todo, setTodo] = useState<Todo>(item);
+  // const { attributes, listeners, setNodeRef, transform } = useDraggable({
+  //   id: 'draggable',
+  // });
+
+  // const style = transform
+  //   ? {
+  //       transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+  //     }
+  //   : undefined;
 
   useEffect(() => {
     setTodo(item);
@@ -79,16 +95,17 @@ const TodoItem: FC<Props> = ({ index, item, onDelete, onUpdateTodo }) => {
           )}
           <div {...stylex.props(styles.buttonGroup)}>
             <Button
+              onClick={() => handleCompleted(index)}
+              text="Done"
+              style={styles.done}
+            />
+            <Button
               onClick={toggleSaveEdit}
               text={isEditing ? 'Save' : 'Edit'}
             />
             <Button
               onClick={() => onDelete(index)}
               text="X"
-            />
-            <Button
-              onClick={() => handleCompleted(index)}
-              text="V"
             />
           </div>
         </li>

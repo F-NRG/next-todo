@@ -5,20 +5,19 @@
   },
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended",
-    "next/core-web-vitals",
     "plugin:jsx-a11y/recommended",
-    "prettier"
+    "next/core-web-vitals",
+    "plugin:react/recommended",
+    "prettier",
+    "plugin:@typescript-eslint/recommended-type-checked"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 12,
     "sourceType": "module",
-    "project": "./tsconfig.json"
+    "project": ["./tsconfig.json"]
   },
   "plugins": ["@typescript-eslint", "prettier", "jsx-a11y", "@stylexjs"],
   "rules": {
@@ -62,11 +61,6 @@
   "settings": {
     "react": {
       "version": "detect"
-    },
-    "env": {
-      "browser": true,
-      "node": true,
-      "es6": true
     }
   }
 }

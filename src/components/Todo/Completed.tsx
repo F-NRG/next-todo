@@ -12,7 +12,7 @@ const styles = stylex.create({
     borderColor: '#a7e8bd',
     borderWidth: '5px',
     borderStyle: 'solid',
-    width: '500px',
+    width: { 'default': '90%', '@media (min-width: 600px)': '500px' },
     gap: '.5rem',
   },
   span: {
