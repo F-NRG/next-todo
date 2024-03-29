@@ -1,13 +1,18 @@
-// @ts-check
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /** @type {import('next').NextConfig} */
 
+import path from 'path';
 import stylexPlugin from '@stylexjs/nextjs-plugin';
-import stylexBabel from './stylexBabel.js';
+
+const rootDir = process.cwd();
 
 const plugin = stylexPlugin({
-  aliases: stylexBabel.aliases,
-  rootDir: stylexBabel.rootDir,
-  useCSSLayers: stylexBabel.useCSSLayers,
+  aliases: {
+    '@/*': [path.join(rootDir, '*')],
+  },
+  rootDir,
+  useCSSLayers: undefined,
 })({ transpilePackages: ['@stylexjs/open-props'] });
 
 const nextConfig = { ...plugin };

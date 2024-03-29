@@ -30,7 +30,7 @@
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-require-imports": "error",
     "@typescript-eslint/no-shadow": "error",
-    "@typescript-eslint/no-unused-vars": ["error", { "ignoreRestSiblings": false }],
+    "@typescript-eslint/no-unused-vars": "error",
     "import/order": "warn",
     "indent": "off",
     "max-len": ["error", 150],
@@ -41,16 +41,6 @@
     "no-unreachable": "error",
     "no-var": "error",
     "object-curly-spacing": ["error", "always"],
-    "padding-line-between-statements": [
-      "error",
-      { "blankLine": "always", "prev": ["block", "const", "let", "var"], "next": ["return", "function", "block", "expression"] },
-      { "blankLine": "always", "prev": ["const", "let", "var"], "next": ["const", "let", "var"] },
-      {
-        "blankLine": "never",
-        "prev": ["singleline-const", "singleline-let", "singleline-var"],
-        "next": ["singleline-const", "singleline-let", "singleline-var"]
-      }
-    ],
     "prefer-const": "error",
     "prefer-template": "error",
     "react/prop-types": "off",
