@@ -1,3 +1,4 @@
+import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata } from 'next';
 import * as stylex from '@stylexjs/stylex';
 import './globals.css';
@@ -29,8 +30,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body {...stylex.props(styles.text, styles.layout)}>{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body {...stylex.props(styles.text, styles.layout)}>{children}</body>
+      </html>
+    </ClerkProvider>
   );
 }
