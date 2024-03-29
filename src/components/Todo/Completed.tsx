@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex';
-import { ChangeEvent, useState, type FC } from 'react';
+import { type FC } from 'react';
 import type { Todo } from '@/types/Todo';
 
 const styles = stylex.create({
@@ -34,7 +34,7 @@ export const Completed: FC<Props> = ({ item }) => {
   return (
     <li {...stylex.props(styles.todo)}>
       <span>V</span>
-      <span {...stylex.props(styles.span)}>{item.value}</span>
+      <span {...stylex.props(styles.span)}>{item.title}</span>
       <span>DONE!</span>
     </li>
   );

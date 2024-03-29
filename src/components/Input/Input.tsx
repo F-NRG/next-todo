@@ -18,17 +18,19 @@ const styles = stylex.create({
 
 type Props = {
   name?: string;
-  value?: string;
-  text?: string;
-  placeholder?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+  required?: boolean;
+  text?: string;
+  value?: string;
 };
 
-const Input: FC<Props> = ({ name = 'input-field', placeholder = 'placeholder', onChange, value }) => {
+const Input: FC<Props> = ({ name = 'input-field', placeholder = 'placeholder', onChange, value, required = true }) => {
   return (
     <input
       {...stylex.props(styles.input)}
       name={name}
+      required={required}
       placeholder={placeholder}
       onChange={onChange}
       value={value}

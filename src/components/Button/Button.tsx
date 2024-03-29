@@ -1,6 +1,7 @@
 'use client';
 
 import * as stylex from '@stylexjs/stylex';
+import type { CompiledStyles } from '@stylexjs/stylex/lib/StyleXTypes';
 import type { FC } from 'react';
 
 const styles = stylex.create({
@@ -18,16 +19,17 @@ const styles = stylex.create({
 
 type Props = {
   value?: string;
+  style?: CompiledStyles;
   text?: string;
   name?: string;
   type?: 'button' | 'submit' | 'reset';
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const Button: FC<Props> = ({ name = 'button-el', value = '', text = 'button', type = 'button', onClick }) => {
+const Button: FC<Props> = ({ name = 'button-el', value = '', text = 'button', type = 'button', onClick, style }) => {
   return (
     <button
-      {...stylex.props(styles.button)}
+      {...stylex.props(styles.button, style)}
       value={value}
       type={type}
       name={name}

@@ -61,7 +61,7 @@ const TodoItem: FC<Props> = ({ index, item, onDelete, onUpdateTodo }) => {
   }, [item]);
 
   const handleItemValue = (e: ChangeEvent<HTMLInputElement>) => {
-    setTodo({ ...todo, value: e.target.value });
+    setTodo({ ...todo, title: e.target.value });
   };
 
   const handleCompleted = (i: number) => {
@@ -69,7 +69,7 @@ const TodoItem: FC<Props> = ({ index, item, onDelete, onUpdateTodo }) => {
   };
 
   const toggleSaveEdit = () => {
-    if (todo.value !== item.value && isEditing) {
+    if (todo.title !== item.title && isEditing) {
       onUpdateTodo(todo, index);
     }
     setIsEditing(!isEditing);
@@ -85,12 +85,12 @@ const TodoItem: FC<Props> = ({ index, item, onDelete, onUpdateTodo }) => {
             <Input
               name="edit-todo"
               onChange={handleItemValue}
-              value={todo.value}
+              value={todo.title}
             />
           ) : (
             <>
               <span {...stylex.props(styles.index)}>#&nbsp;{index + 1}</span>
-              <span>{todo.value}</span>
+              <span>{todo.title}</span>
             </>
           )}
           <div {...stylex.props(styles.buttonGroup)}>

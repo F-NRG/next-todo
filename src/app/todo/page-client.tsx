@@ -1,11 +1,12 @@
 'use client';
 import * as stylex from '@stylexjs/stylex';
-import type { FormEvent } from 'react';
+import type { FC, FormEvent } from 'react';
 import { useState } from 'react';
 import Button from '@/components/Button/Button';
 import Input from '@/components/Input/Input';
 import List from '@/components/List/List';
 import type { Todo } from '@/types/Todo';
+import { createTodo, deleteTodo, updateTodo } from '@/utils/actions';
 
 const styles = stylex.create({
   form: {
@@ -18,32 +19,69 @@ const styles = stylex.create({
     padding: '.5rem',
     width: '400px',
   },
+  hr: {
+    opacity: 0,
+  },
 });
 
-const ClientPage = () => {
-  const [todos, setTodos] = useState<Array<Todo>>([]);
+type Props = {
+  existingTodos: Array<Todo> | undefined;
+};
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+const ClientPage: FC<Props> = ({ existingTodos = [] }) => {
+  const [todos, setTodos] = useState<Array<Todo>>(existingTodos);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    const input = e.target as HTMLFormElement;
-    setTodos([...todos, { value: input.todo.value, completed: false }]);
+    setLoading(true);
+
+    const form = e.target as HTMLFormElement;
+    const { value } = form.todo as { value: string };
+
+    const result = await createTodo({
+      title: value,
+      completed: false,
+      authorId: 0,
+    });
+
+    setTodos([...todos, result]);
+    setLoading(false);
+    form.reset();
+
+    console.log('result', result);
   };
 
-  const handleUpdateItem = (todo: Todo, index: number) => {
-    const updatedTodos = todos.map((item, i) => (i === index ? { ...todo } : item));
+  const handleUpdateItem = async (todo: Todo, index: number) => {
+    setLoading(true);
+
+    const result = await updateTodo(todo);
+    const updatedTodos = todos.map((item, i) => (i === index ? { ...result } : item));
+
+    console.log('result handleUpdateItem', result);
+
     setTodos(updatedTodos);
+    setLoading(false);
   };
 
-  const handleDeleteItem = (index: number) => {
+  const handleDeleteItem = async (index: number) => {
+    setLoading(true);
+
+    const result = todos[index].id && (await deleteTodo(todos[index].id));
+    console.log('result handleDeleteItem', result);
+
     const updatedTodos = todos.filter((_, i) => i !== index);
+
     setTodos(updatedTodos);
+    setLoading(false);
   };
 
   return (
     <>
+      <hr {...stylex.props(styles.hr)} />
       <form
         {...stylex.props(styles.form)}
-        onSubmit={handleSubmit}
+        onSubmit={(e) => void handleSubmit(e)}
       >
         <Input
           placeholder="Start typing..."
@@ -55,12 +93,13 @@ const ClientPage = () => {
           name="add-todo"
         />
       </form>
+      {loading && <div>syncing with the cloud...</div>}
 
       <List
         title="Start doing:"
         todos={todos}
-        onDelete={handleDeleteItem}
-        onUpdateTodo={handleUpdateItem}
+        onDelete={(i) => void handleDeleteItem(i)}
+        onUpdateTodo={(t, i) => void handleUpdateItem(t, i)}
       />
     </>
   );

@@ -1,8 +1,9 @@
 'use client';
 import * as stylex from '@stylexjs/stylex';
-import type { ChangeEvent, FC } from 'react';
-import type { Todo } from '@/types/Todo';
+import type { FC } from 'react';
+
 import TodoItem from '../Todo/Todo';
+import type { Todo } from '@/types/Todo';
 
 const styles = stylex.create({
   list: {
@@ -30,7 +31,13 @@ type Props = {
 };
 
 const List: FC<Props> = ({ todos, title, onDelete, onUpdateTodo }) => {
-  console.log('todos in list: ', todos[0]);
+  // const { isOver, setNodeRef } = useDroppable({
+  //   id: 'droppable',
+  // });
+  // const style = {
+  //   color: isOver ? 'green' : undefined,
+  // };
+
   return (
     <section>
       <h2>{title}</h2>
