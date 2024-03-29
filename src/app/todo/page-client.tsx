@@ -66,8 +66,8 @@ const ClientPage: FC<Props> = ({ existingTodos = [] }) => {
 
   const handleDeleteItem = async (index: number) => {
     setLoading(true);
-
-    const result = todos[index].id && (await deleteTodo(todos[index].id));
+    const id = todos[index].id ?? 0;
+    const result = await deleteTodo(id);
     console.log('result handleDeleteItem', result);
 
     const updatedTodos = todos.filter((_, i) => i !== index);
