@@ -1,4 +1,6 @@
 export type Todo = {
-  value: string;
+  authorId: number;
   completed: boolean;
+  id?: number;
+  title: string;
 };
